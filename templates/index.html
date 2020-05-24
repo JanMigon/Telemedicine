@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
 {% block head %}
 <title>Home</title>
+<link rel="stylesheet" href="/static/css/index.css">
 {% endblock %}
 
 {% block body %}
 <br>
-<h1>Home Page</h1>
+<h1>Strona Główna</h1>
 <br>
 <main role="main">
     <div class="jumbotron">
-      <div class="col-sm-8 mx-auto">
+      <div class="col-sm-12 mx-auto">
         <h1 style="text-align:center">Witamy!</h1>
         <p style="text-align: center">Celem projektu było zaprojektowanie i zaimplementowanie aplikacji webowej z obsługą bazy danych, umożliwiającej wizualizację, analizę oraz udostępnianie danych pomiarowych otrzymanych od innego zespołu badawczego, zajmującego się systemem bezprzewodowego pomiaru sygnałów biomedycznych EKG.</p>
         <p style="text-align: center">Zapraszamy do skorzystania z aplikacji.</p>
           <p style="text-align: center">
-          <a class="btn btn-primary" href="/about" role="button">I want to know more. &raquo;</a>
+          <a class="btn btn-dark" href="/about" role="button">Chcę wiedzieć więcej o projekcie&raquo;</a>
         </p>
       </div>
     </div>
