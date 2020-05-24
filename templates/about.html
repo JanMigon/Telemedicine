@@ -1,23 +1,23 @@
 {% extends 'base.html' %}
 {% block head %}
-<title>About</title>
+<title>Opis projektu</title>
+<link rel="stylesheet" href="/static/css/about.css">
 {% endblock %}
 
 {% block body %}
 <br>
-<h1>About</h1>
+<h1>Informacje o projekcie</h1>
 <br>
 <main role="main">
     <div class="jumbotron">
       <div class="col-sm-8 mx-auto">
-        <h1 style="text-align:center">O projekcie</h1>
-        <p style="text-align:center">Celem projektu jest zaprojektowanie i zaimplementowanie aplikacji webowej z obsługą bazy danych, umożliwiającej wizualizację, analizę oraz udostępnianie danych pomiarowych otrzymanych od innego zespołu badawczego, zajmującego się systemem bezprzewodowego pomiaru sygnałów biomedycznych EKG.
+        <p style="text-align: justify;">Celem projektu jest zaprojektowanie i zaimplementowanie aplikacji webowej z obsługą bazy danych, umożliwiającej wizualizację, analizę oraz udostępnianie danych pomiarowych otrzymanych od innego zespołu badawczego, zajmującego się systemem bezprzewodowego pomiaru sygnałów biomedycznych EKG.
             Projekt zostanie wykonany w oparciu o początkowo zdobytą wiedzę teoretyczną na podstawie opracowanych przez członków zespołu artykułów naukowych przedstawiających dostępne rozwiązania. Następnie zostanie opracowany plan projektowania struktury aplikacji z wyszczególnieniem kroków milowych. Na podstawie opracowanego planu zespół wspólnie będzie realizował poszczególne komponenty opracowywanej aplikacji webowej. W ramach realizacji projektu przewidywane jest usprawnienie i poszerzenie aplikacji stworzonej w poprzednich latach.
             Przewidziane jest budowanie aplikacji webowej w oparciu o język Python z wykorzystaniem freamworka Django, baza danych zostanie stworzona w oparciu o systemy zarządzania bazami danych takie jak SQLLite oraz SQLAlchemy, które doskonale współpracują z Django. Część designu aplikacji zostanie rozwiązana przy użyciu dokumentacji Bootstrap, która zawiera wbudowane komponenty HTMLa, języka JavaScript oraz CSS (kaskadowe arkusze stylów), pozwoli to na zachowanie responsywności strony i przejrzystości tworzonej aplikacji, co jest szczególnie ważne dla korzystającego z aplikacji użytkownika.
             W celu sprawnej komunikacji pomiędzy członkami zespołu skorzystano z aplikacji Microsoft Teams, dzięki temu osoba odpowiedzialna za zespół jest w stanie monitorować postępy i kontaktować się z poszczególnymi osobami. Aplikacja umożliwia również tworzenie wideokonferencji, co usprawnia komunikację. Cały zespół będzie korzystał z systemu kontroli wersji GitHub, dzięki temu każdy z członków zespołu ma dostęp do kodu źródłowego i możliwość wprowadzania zmian, które będą widoczne dla pozostałych.
             Efektem przedstawionego planu działania ma być działającą aplikacja webowa, która na podstawie wprowadzonych przez użytkownika danych będzie je w odpowiedni sposób analizować i wizualizować.</p>
         <p>
-          <a class="btn btn-primary" href="/upload" role="button">I want to upload my dataset. &raquo;</a>
+          <a class="btn btn-dark" style="text-align:center;" href="/upload" role="button">Chcę wgrać swoje dane&raquo;</a>
         </p>
       </div>
     </div>

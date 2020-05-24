@@ -1,6 +1,7 @@
 #! /usr/bin/python
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
+import flask_excel as excel
 
 app = Flask(__name__)
 
@@ -20,9 +21,12 @@ def results():
     return render_template('results.html')
 
 
-@app.route('/upload')
+@app.route('/upload', methods=['GET', 'POST'])
 def upload():
+    if request.method == 'POST':
+        return jsonify({"result": request.get_array(field_name='file')})
     return render_template('upload.html')
+
 
 if __name__ == "__main__":
     app.run()

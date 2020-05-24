@@ -1,0 +1,15 @@
+.jumbotron{
+    background-color: #d1b6b6;
+    color: black;
+    font-size:18px;
+}
+.btn-dark{
+    text-align: center;
+    display: block;
+    margin: auto;
+    align-items: center;
+}
+
+form{
+text-align: center;
+}
