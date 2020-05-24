@@ -1,19 +1,23 @@
 {% extends 'base.html' %}
 {% block head %}
 <title>Upload dataset</title>
+<link rel="stylesheet" href="/static/css/upload.css">
 {% endblock %}
 
 {% block body %}
 <br>
-<h1>Upload dataset</h1>
+<h1>Wgraj dane</h1>
 <br>
 <main role="main">
     <div class="jumbotron">
       <div class="col-sm-8 mx-auto">
-        <h1>Upload daataset</h1>
-        <p>In progress</p>
+          <form action="" method=post enctype=multipart/form-data>
+            <input class="button" type=file name=file value="Wybierz plik">
+            <input class="button" type=submit value="Wgraj plik">
+          </form>
+          <br>
         <p>
-          <a class="btn btn-primary" href="/results" role="button">I want to see results. &raquo;</a>
+          <a class="btn btn-dark" href="/results" role="button">I want to see results. &raquo;</a>
         </p>
       </div>
     </div>
