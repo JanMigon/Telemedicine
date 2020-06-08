@@ -5,17 +5,27 @@
 
 {% block body %}
 <br>
-<h1>Results</h1>
+<h1 style="text-align:center">Wyniki</h1>
 <br>
+
 <main role="main">
-    <div class="jumbotron">
-      <div class="col-sm-8 mx-auto">
-        <h1>Results</h1>
-        <p>In progress</p>
+
+
+        <h4>Wgrane pliki</h4>
+
+        <form method="POST" action="/results">
+            <select name="files" id="files" style="width:100px;height:30px" required>
+            <option value="" disabled="disabled" selected hidden>Wybierz...</option>
+                {%for file in files %}
+                <option value = {{ file.filename }}> {{ file.filename }}<br>
+                {% endfor %}
+            </select>
+        <input type="submit" value="Wyświetl" style="width:100px;height:30px">
+        </form>
+        <br><br>
         <p>
-          <a class="btn btn-primary" href="/upload" role="button">I want to upload my dataset. &raquo;</a>
+          <a class="btn btn-primary" href="/upload-form" role="button">Wczytaj dane. &raquo;</a>
         </p>
-      </div>
-    </div>
+
   </main>
 {% endblock %}
