@@ -4,7 +4,6 @@ import os
 import re
 
 from flask import Flask, render_template, request, jsonify, flash, redirect
-from werkzeug import SharedDataMiddleware
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 
@@ -13,8 +12,6 @@ ALLOWED_EXTENSIONS = ['txt', 'csv']
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///formdata.db'
-app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
-    '/uploads':  app.config['UPLOAD_FOLDER']})
 app.secret_key = "janekjestsuperowy"
 
 db = SQLAlchemy(app)
@@ -50,24 +47,21 @@ def about():
 def results():
     files = db.session.query(Formdata).all()
     if request.method == 'POST':
-        filename = request.form['selectFile']
-        data = db.session.query(Formdata).filter_by(filename = filename).data
+        filename = request.form['files']
+        records = db.session.query(Formdata).filter_by(filename=filename).first()
         if filename.endswith('.txt'):
-            points = data.split('\n')
-            y_data = [re.findall(r'[0-9]+', point)[0] for point in points]
-            x_data = [re.findall(r'[0-9]+', point)[1] for point in points]
+            points = records.data.decode('utf-8').split('\n')
+            data = [list(map(lambda x: float(x), re.findall(r'[0-9]+', point)[::-1]))
+                    for point in points if point.strip() != ""]
         elif filename.endswith('.csv'):
-            points = data.split('\n')[1:]
-            x_data = [point[0] for point in points]
-            y_data = [point[1] for point in points]
+            points = records.data.decode('utf-8').split('\n')[1:]
+            data = [list(map(lambda x: float(x), point.split(','))) for point in points if point.strip() != ""]
         else:
             flash('Format pliku nieobsługiwany')
-            x_data = None
-            y_data = None
+            data = None
     else:
-        x_data = None
-        y_data = None
-    return render_template('results.html', files=files, x_data=x_data, y_data=y_data)
+        data = None
+    return render_template('results.html', files=files, data=data)
 
 
 @app.route('/upload', methods=['GET', 'POST'])
