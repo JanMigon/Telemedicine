@@ -20,12 +20,13 @@ app.secret_key = "janekjestsuperowy"
 
 db = SQLAlchemy(app)
 
+
 class Formdata(db.Model):
     __tablename__ = 'ekgdata'
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.DateTime, default=datetime.datetime.now())
     filename = db.Column(db.String)
-    data = db.Column(db.String)
+    data = db.Column(db.LargeBinary)
 
     def __init__(self, filename, data):
         self.filename = filename
@@ -147,4 +148,3 @@ def upload_data():
 
 if __name__ == "__main__":
     app.run(debug=True)
-    #results()
