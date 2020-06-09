@@ -20,6 +20,7 @@ app.secret_key = "janekjestsuperowy"
 
 db = SQLAlchemy(app)
 
+
 class Formdata(db.Model):
     __tablename__ = 'ekgdata'
     id = db.Column(db.Integer, primary_key=True)
