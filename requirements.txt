@@ -1,0 +1,16 @@
+flask
+werkzeug
+flask_script
+lask_migrate
+flask_sqlalchemy
+datetime
+pickle
+pandas
+numpy
+re
+scipy
+biosppy
+psycopg2
+gunicorn
+Jinja2
+alembic

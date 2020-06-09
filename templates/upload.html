@@ -11,15 +11,24 @@
 <main role="main">
     <div class="jumbotron">
       <div class="col-sm-8 mx-auto">
-          <form action="" method=post enctype=multipart/form-data>
+          <form action="/upload" method=post enctype=multipart/form-data>
             <input class="button" type=file name=file value="Wybierz plik">
             <input class="button" type=submit value="Wgraj plik">
           </form>
           <br>
         <p>
-          <a class="btn btn-dark" href="/results" role="button">I want to see results. &raquo;</a>
+          <a class="btn btn-dark" href="/results" role="button">Pokaż wyniki. &raquo;</a>
         </p>
       </div>
+        {% with message = get_flashed_messages() %}
+            {% if message %}
+                {% if message[0].startswith('Wgrano') %}
+                    <p style="color:green;text-align:center">{{message[0]}}</p>
+                {% else %}
+                    <p style="color:red;text-align:center">{{message[0]}}</p>
+            {% endif %}
+            {% endif %}
+        {% endwith %}
     </div>
   </main>
 {% endblock %}

@@ -5,17 +5,124 @@
 
 {% block body %}
 <br>
-<h1>Results</h1>
+<h1 style="text-align:center">Wyniki</h1>
 <br>
-<main role="main">
-    <div class="jumbotron">
-      <div class="col-sm-8 mx-auto">
-        <h1>Results</h1>
-        <p>In progress</p>
+
+        <h4>Wgrane pliki</h4>
+
+        <form method="POST" action="/results">
+            <select name="files" id="files" style="width:100px;height:30px" required>
+            <option value="" disabled="disabled" selected hidden>Wybierz...</option>
+                {%for file in files %}
+                <option value = {{ file.filename }}> {{ file.filename }}</option>
+                {% endfor %}
+            </select>
+        <input type="submit" value="Wyświetl" style="width:100px;height:30px">
+        </form>
+        <br><br>
         <p>
-          <a class="btn btn-primary" href="/upload" role="button">I want to upload my dataset. &raquo;</a>
+          <a class="btn btn-primary" href="/upload-form" role="button">Wczytaj dane</a>
         </p>
-      </div>
-    </div>
-  </main>
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+
+        google.charts.setOnLoadCallback(drawRawEkg);
+        google.charts.setOnLoadCallback(drawHeartRate);
+        google.charts.setOnLoadCallback(drawTemplates);
+        google.charts.setOnLoadCallback(drawFilteredEkg);
+
+    function drawRawEkg() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 't');
+      data.addColumn('number', 'EKG');
+      if (data !== undefined){
+      data.addRows({{ data|default('')|tojson }});
+
+      var options = {
+        title: 'Surowe EKG',
+        hAxis: {
+          title: 'Czas [ms]'
+        },
+        vAxis: {
+          title: 'Amplituda [mV]'
+        },
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('ekg_signal'));
+      chart.draw(data, options);}
+    }
+
+    function drawFilteredEkg() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 't');
+      data.addColumn('number', 'EKG');
+      if (data !== undefined){
+      data.addRows({{ filtered|default('')|tojson }});
+
+      var options = {
+        title: 'Przefiltrowane EKG',
+        hAxis: {
+          title: 'Czas [ms]'
+        },
+        vAxis: {
+          title: 'Amplituda [mV]'
+        },
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('ekg_filtered'));
+      chart.draw(data, options);}
+    }
+
+    function drawHeartRate() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 't');
+      data.addColumn('number', 'Tętno');
+      if (heart_rate !== undefined){
+      data.addRows({{ heart_rate|default('')|tojson }});
+
+      var options = {
+        title: 'Tętno',
+        hAxis: {
+          title: 'Czas [s]'
+        },
+        vAxis: {
+          title: 'Tętno [bmp]'
+        },
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('heart_rate'));
+      chart.draw(data, options);}
+    }
+
+    function drawTemplates() {
+      if (templates !== undefined){
+      var data = google.visualization.arrayToDataTable({{ templates|default('')|tojson }});
+
+      var options = {
+        title: 'Nałożone załamki',
+        legend: 'none',
+        hAxis: {
+          title: 'Czas [s]'
+        },
+        vAxis: {
+          title: 'Amplituda [mV]'
+        },
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('templates'));
+      chart.draw(data, options);}
+    }
+    </script>
+
+    <div id="ekg_signal"></div>
+    <br>
+    <div id="ekg_filtered"></div>
+    <br>
+    <div id="heart_rate"></div>
+    <br>
+    <div id="templates"></div>
+    <br><br><br>
 {% endblock %}
