@@ -4,18 +4,18 @@ import pickle
 import numpy as np
 import re
 import scipy.io as sio
+import psycopg2
 
 from biosppy.signals import ecg
 from flask import Flask, render_template, request, jsonify, flash, redirect
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
-from sklearn.externals import joblib
 
 ALLOWED_EXTENSIONS = ['txt', 'csv', 'mat']
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///formdata.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ntxdmbpfzkpjvt:fa7f34391b5f380d29d8da39122e26b71f54bdc17318606bb6bf302415f1d83d@ec2-54-75-246-118.eu-west-1.compute.amazonaws.com:5432/dcsu8khhfhuit2'
 app.secret_key = "janekjestsuperowy"
 
 db = SQLAlchemy(app)
