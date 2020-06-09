@@ -6,7 +6,6 @@ flask_sqlalchemy
 datetime
 pandas
 numpy
-re
 scipy
 biosppy
 psycopg2
